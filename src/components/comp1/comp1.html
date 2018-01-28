@@ -1,0 +1,3 @@
+<div *ngFor="let element of appState.elements">
+  <comp2 [element]="element" (simpleElementChanged)="handleSimpleAction($event)" (complexElementChanged)="handleComplexAction($event)"></comp2>
+</div>

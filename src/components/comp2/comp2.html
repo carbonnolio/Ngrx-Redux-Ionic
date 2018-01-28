@@ -1,0 +1,16 @@
+<div [ngSwitch]='element.elementId'>
+  <div *ngSwitchCase="'input'">
+    <ion-input type="number" placeholder="Enter Number" class="number-box" [value]="element.elementValue" [disabled]="!element.enable"
+               (ionBlur)="onSimpleElementChanged($event)"></ion-input>
+  </div>
+  <div *ngSwitchCase="'segment'">
+    <ion-segment (ionChange)="onComplexElementChanged($event)" [ngModel]="element.elementValue">
+      <ion-segment-button *ngFor="let option of element.options" [value]="option.value">
+        {{option.title}}
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div *ngSwitchDefault>
+    <p>I am default...</p>
+  </div>
+</div>
