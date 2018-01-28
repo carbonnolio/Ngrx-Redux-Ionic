@@ -1,9 +1,11 @@
 <div [ngSwitch]='element.elementId'>
   <div *ngSwitchCase="'input'">
+    <!-- Try to use (ionBlur) to emit vlur event. -->
     <ion-input type="number" placeholder="Enter Number" class="number-box" [value]="element.elementValue" [disabled]="!element.enable"
                (ionBlur)="onSimpleElementChanged($event)"></ion-input>
   </div>
   <div *ngSwitchCase="'segment'">
+    <!-- Since ion-segment works only with [(ngModel)], to assign new value you can use one way binding of ngModel. -->
     <ion-segment (ionChange)="onComplexElementChanged($event)" [ngModel]="element.elementValue">
       <ion-segment-button *ngFor="let option of element.options" [value]="option.value">
         {{option.title}}

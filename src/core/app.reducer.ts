@@ -55,6 +55,7 @@ export const reducer = (state: AppState = InitialState, action: ActionWithPayloa
 
           let changedElements = toggleElement(state.elements, 0, enableElement);
 
+          // Return new state, created with new array created through Array.map
           return { elements: applyValueChange(changedElements || state.elements, action.payload) };
 
       default:
@@ -67,11 +68,16 @@ elements.map(
   (element, i) => (i === payload.elementIndex) ? {...element, elementValue: payload.value} : element
 );
 
+// To update value in child array, you can create a new reference to entire array through Array.map.
 const toggleElement = (elements: SimpleElement[], elementIndex: number, status: boolean): SimpleElement[] => elements.map(
+  // If current element index matching passed index, create a new object and...
   (element, i) => (i === elementIndex) ? {
+    // copy exisiting properties...
     ...element,
+    // and new properies which we want to have in new state.
     enable: status,
     elementValue: status ? element.elementValue : null
+  // If index doesn't match, than just map element to inself.
   } : element
 );
 
